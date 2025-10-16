@@ -1,45 +1,45 @@
+# app.py
 import streamlit as st
+from streamlit_option_menu import option_menu
 
-# -----------------------------
-# PAGE CONFIGURATION
-# -----------------------------
-st.set_page_config(
-    page_title="Flood Forecasting and Analysis System",
-    page_icon="🌊",
-    layout="wide"
-)
+# import pages as modules
+from pages import data_cleaning, visualization, analysis, forecasting, summary
 
-# -----------------------------
-# MAIN PAGE CONTENT (HOME)
-# -----------------------------
-st.title("🌊 Flood Forecasting & Analysis System")
-st.write("Welcome to the multi-page Streamlit application!")
+st.set_page_config(page_title="Flood Forecast System", layout="wide", page_icon="🌊")
 
-st.markdown("""
-This system allows you to:
+# Sidebar menu
+with st.sidebar:
+    st.title("Flood System")
+    selected = option_menu(
+        menu_title=None,
+        options=["Home", "Data Cleaning", "Visualization", "Analysis", "Forecasting", "Summary"],
+        icons=["house", "cloud-upload", "bar-chart", "clipboard-data", "activity", "download"],
+        menu_icon="cast",
+        default_index=0,
+    )
 
-✅ Upload and clean flood-related datasets  
-✅ Visualize water levels, flood occurrences, and damages  
-✅ Analyze trends and patterns by year or area  
-✅ Build forecasting models (SARIMA, etc.)  
-✅ View summary statistics and insights  
+# Home content
+if selected == "Home":
+    st.title("🌊 Flood Forecasting & Analysis System")
+    st.markdown("""
+    **Welcome!** Use the sidebar to navigate:
+    - **Data Cleaning** — upload and process CSV
+    - **Visualization** — interactive charts
+    - **Analysis** — yearly summaries & top areas
+    - **Forecasting** — SARIMA forecasting (optional)
+    - **Summary** — download processed outputs
+    """)
+    st.info("Start at **Data Cleaning** to upload and process your dataset.")
+    st.write("If you want a sample CSV, generate it on the Data Cleaning page.")
 
----
-
-### 📌 Navigation Guide
-Use the **left sidebar** to access all pages:
-
-**1️⃣ Data Cleaning** – Upload & prepare your dataset  
-**2️⃣ Visualization** – Charts & graphs  
-**3️⃣ Analysis** – Flood counts, averages, top areas, damages  
-**4️⃣ Forecasting** – Time-series prediction (SARIMA)  
-**5️⃣ Summary** – Final report and key insights
-
----
-
-✅ Each page will guide you step by step.  
-✅ Start with **Data Cleaning**.  
-""")
-
-st.info("👉 Go to the sidebar and click **1_Data_Cleaning** to begin.")
-st.write("If you don't see the sidebar, click the **>** icon in the top left.")
+# Delegate to page modules
+elif selected == "Data Cleaning":
+    data_cleaning.app()
+elif selected == "Visualization":
+    visualization.app()
+elif selected == "Analysis":
+    analysis.app()
+elif selected == "Forecasting":
+    forecasting.app()
+elif selected == "Summary":
+    summary.app()
