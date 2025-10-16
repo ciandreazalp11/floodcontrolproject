@@ -1,43 +1,45 @@
-# app.py
 import streamlit as st
-import pandas as pd
-import numpy as np
-from pathlib import Path
 
-st.set_page_config(page_title="Flood Forecast System", layout="wide")
-st.title("Flood Forecasting & Analysis — Home")
-
-st.markdown(
-    """
-    This project is a multi-page Streamlit app for flood detection, visualization, and SARIMA forecasting.
-    Use the left sidebar or the pages menu (top-left) to navigate:
-    - **Data Cleaning** (detect columns, preview)
-    - **Visualization** (interactive charts)
-    - **Analysis** (summary by year, affected areas, damage)
-    - **Forecasting** (SARIMA)
-    - **Summary** (download processed outputs)
-    """
+# -----------------------------
+# PAGE CONFIGURATION
+# -----------------------------
+st.set_page_config(
+    page_title="Flood Forecasting and Analysis System",
+    page_icon="🌊",
+    layout="wide"
 )
 
-st.header("Quick start")
-st.markdown(
-    """
-    1. Go to **Data Cleaning** and upload your CSV (or use the sample dataset).
-    2. Set optional column overrides (date, water level, area).
-    3. Run analysis and use the other pages for charts and forecasting.
-    """
-)
+# -----------------------------
+# MAIN PAGE CONTENT (HOME)
+# -----------------------------
+st.title("🌊 Flood Forecasting & Analysis System")
+st.write("Welcome to the multi-page Streamlit application!")
 
-# Show small demo / sample file generator
-if st.button("Generate small sample dataset and navigate to Data Cleaning"):
-    # create sample dataset in memory and save locally to ./data/sample_data.csv
-    Path("data").mkdir(exist_ok=True)
-    dates = pd.date_range("2020-01-01", periods=360, freq="D")
-    sample = pd.DataFrame({
-        "Date": dates,
-        "WaterLevel_m": (np.sin(np.arange(len(dates))/30) * 0.6 + 1.5 + np.random.normal(0, 0.15, len(dates))).round(3),
-        "Barangay": np.random.choice(['Brgy A','Brgy B','Brgy C','Brgy D'], len(dates)),
-        "Estimated_damage": (np.random.rand(len(dates))*1000).round(2)
-    })
-    sample.to_csv("data/sample_data.csv", index=False)
-    st.success("Sample dataset saved to data/sample_data.csv. Open the 'Data Cleaning' page.")
+st.markdown("""
+This system allows you to:
+
+✅ Upload and clean flood-related datasets  
+✅ Visualize water levels, flood occurrences, and damages  
+✅ Analyze trends and patterns by year or area  
+✅ Build forecasting models (SARIMA, etc.)  
+✅ View summary statistics and insights  
+
+---
+
+### 📌 Navigation Guide
+Use the **left sidebar** to access all pages:
+
+**1️⃣ Data Cleaning** – Upload & prepare your dataset  
+**2️⃣ Visualization** – Charts & graphs  
+**3️⃣ Analysis** – Flood counts, averages, top areas, damages  
+**4️⃣ Forecasting** – Time-series prediction (SARIMA)  
+**5️⃣ Summary** – Final report and key insights
+
+---
+
+✅ Each page will guide you step by step.  
+✅ Start with **Data Cleaning**.  
+""")
+
+st.info("👉 Go to the sidebar and click **1_Data_Cleaning** to begin.")
+st.write("If you don't see the sidebar, click the **>** icon in the top left.")
