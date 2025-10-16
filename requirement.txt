@@ -1,10 +1,23 @@
-streamlit
-pandas
-numpy
-matplotlib
-seaborn
-plotly
-statsmodels
-scikit-learn
-pmdarima
-scipy
+# Core
+streamlit>=1.20.0
+
+# Data & math
+pandas>=1.5
+numpy>=1.23
+scipy>=1.10
+
+# Visualization
+plotly>=5.6
+matplotlib>=3.6
+seaborn>=0.12
+
+# Time-series & forecasting
+statsmodels>=0.14
+pmdarima>=2.1
+
+# ML utilities
+scikit-learn>=1.1
+
+# Optional file formats
+openpyxl>=3.0
+xlrd>=2.0
